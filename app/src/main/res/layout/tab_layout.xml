@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rb_ganhuo"
+        android:drawableTop="@drawable/rb_ganhuo_select"
+        android:text="干货"
+        style="@style/style_radio_button"/>
+
+    <RadioButton
+        android:id="@+id/rb_fuli"
+        android:drawableTop="@drawable/rb_fuli_select"
+        android:text="福利"
+        style="@style/style_radio_button"/>
+
+    <RadioButton
+        android:id="@+id/rb_yidong"
+        android:drawableTop="@drawable/rb_yidong_select"
+        android:text="移动"
+        style="@style/style_radio_button"/>
+
+    </RadioGroup>
+</LinearLayout>
