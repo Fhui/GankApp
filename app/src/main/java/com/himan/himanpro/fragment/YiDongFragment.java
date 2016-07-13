@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.himan.himanpro.R;
 import com.himan.himanpro.core.BaseFragment;
+import com.himan.himanpro.view.CustomDialog;
+import com.himan.himanpro.view.SuperLoadingProgress;
 
 /**
  * Created by HIMan on 16/7/4.
@@ -17,20 +19,28 @@ import com.himan.himanpro.core.BaseFragment;
 public class YiDongFragment extends BaseFragment {
 
     private View view;
+    private SuperLoadingProgress custom_progress;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_yidong, null);
-        initView();
         return view;
     }
 
     public void initView(){
+        custom_progress = (SuperLoadingProgress) view.findViewById(R.id.custom_progress);
+        custom_progress.finishFail();
     }
 
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

@@ -1,6 +1,7 @@
 package com.himan.himanpro.mvp.model;
 
 import com.himan.himanpro.domain.RandomData;
+import com.himan.himanpro.domain.SortData;
 
 import java.util.List;
 
@@ -11,5 +12,4 @@ public interface ILoadListener {
 
     void loadSuccess(List<RandomData.ResultsBean> randomData);
     void loadError(String errorinfo);
-
 }

@@ -30,4 +30,5 @@ dependencies {
     compile project(':library')
     compile files('libs/gson-2.2.1.jar')
     compile files('libs/volley.jar')
+    compile 'com.android.support:recyclerview-v7:24.0.0'
 }
