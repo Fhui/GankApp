@@ -1,4 +1,4 @@
-package com.himan.himanpro.mvp.view;
+package com.himan.himanpro.mvp.view.ganhuo;
 
 import android.widget.ImageView;
 

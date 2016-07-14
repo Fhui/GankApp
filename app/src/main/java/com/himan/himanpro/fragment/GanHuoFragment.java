@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +22,10 @@ import com.himan.himanpro.core.BaseFragment;
 import com.himan.himanpro.core.ProConstant;
 import com.himan.himanpro.domain.RandomData;
 import com.himan.himanpro.holder.GanHuoHolder;
-import com.himan.himanpro.holder.ViewHolder;
 import com.himan.himanpro.mvp.presenter.RandomDataPresemter;
-import com.himan.himanpro.mvp.view.ISetLoad;
+import com.himan.himanpro.mvp.view.ganhuo.ISetLoad;
 import com.himan.himanpro.utils.LogUtils;
 import com.himan.himanpro.utils.ProgressUtils;
-import com.himan.himanpro.view.CircleProgress;
-import com.himan.himanpro.view.CustomDialog;
-import com.himan.himanpro.view.SuperLoadingProgress;
 
 import java.util.List;
 
@@ -90,7 +85,6 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
             super.handleMessage(msg);
         }
     };
-
 
 
     @Override
@@ -184,6 +178,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
                 LogUtils.i( "item:"+i+"click.s");
                 Intent intent = new Intent(getActivity(), ContentActivity.class);
                 intent.putExtra("content", resultsList.get(i).getContent());
+                intent.putExtra("title", "干货");
                 startActivity(intent);
             }
         });

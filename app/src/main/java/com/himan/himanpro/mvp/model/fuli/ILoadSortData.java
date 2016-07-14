@@ -1,6 +1,6 @@
-package com.himan.himanpro.mvp.model;
+package com.himan.himanpro.mvp.model.fuli;
 
-import android.view.View;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.himan.himanpro.domain.SortData;
@@ -13,5 +13,7 @@ import java.util.List;
 public interface ILoadSortData {
 
     List<SortData.ResultsBean> getSortData(String url, ILoadSortListener listener);
+
+    Bitmap loadImg(String url, ImageView view);
 
 }

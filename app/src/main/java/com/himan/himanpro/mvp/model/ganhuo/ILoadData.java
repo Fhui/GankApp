@@ -1,4 +1,4 @@
-package com.himan.himanpro.mvp.model;
+package com.himan.himanpro.mvp.model.ganhuo;
 
 import com.himan.himanpro.domain.RandomData;
 

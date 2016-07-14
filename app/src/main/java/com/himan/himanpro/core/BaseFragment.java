@@ -15,14 +15,13 @@ import com.himan.himanpro.view.SuperLoadingProgress;
 public abstract class BaseFragment extends Fragment {
 
 
-     public boolean mHasLoadedOnce = false;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+
     @Override
     public void onStart() {
         super.onStart();

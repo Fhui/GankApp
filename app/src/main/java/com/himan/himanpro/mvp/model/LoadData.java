@@ -1,23 +1,25 @@
 package com.himan.himanpro.mvp.model;
 
-import android.view.View;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
-
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.himan.himanpro.R;
 import com.himan.himanpro.domain.RBResponse;
 import com.himan.himanpro.domain.RandomData;
 import com.himan.himanpro.domain.SortData;
+import com.himan.himanpro.mvp.model.ganhuo.ILoadListener;
+import com.himan.himanpro.mvp.model.fuli.ILoadSortData;
+import com.himan.himanpro.mvp.model.fuli.ILoadSortListener;
+import com.himan.himanpro.mvp.model.ganhuo.ILoadData;
 import com.himan.himanpro.net.HttpLoader;
 import com.himan.himanpro.net.ResponseListener;
-
 import java.util.List;
 
 /**
  * Created by HIMan on 16/7/5.
  */
-public class LoadData implements  ILoadData, ILoadSortData, ILoadImg{
+public class LoadData implements ILoadData, ILoadSortData {
 
     private List<RandomData.ResultsBean> randomDataList;
     private List<SortData.ResultsBean> sortDataList;
@@ -68,9 +70,11 @@ public class LoadData implements  ILoadData, ILoadSortData, ILoadImg{
     }
 
     @Override
-    public void loadImg(String url, ImageView view) {
+    public Bitmap loadImg(String url, ImageView view) {
         ImageLoader loader = HttpLoader.getImageLoader();
         ImageLoader.ImageListener loaderListener = ImageLoader.getImageListener(view, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
-        loader.get(url, loaderListener);
+        ImageLoader.ImageContainer imageContainer = loader.get(url, loaderListener);
+        Bitmap bitmap = imageContainer.getBitmap();
+        return bitmap;
     }
 }

@@ -98,8 +98,8 @@ public class AppStartActivity extends BaseActivity {
         toolbar.setTitle("干货");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        vp_home.setOffscreenPageLimit(3);
         vp_home.setAdapter(new MyFragmentAdapter(getSupportFragmentManager(), fragment_list));
+        vp_home.setOffscreenPageLimit(0);
         vp_home.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -126,6 +126,7 @@ public class AppStartActivity extends BaseActivity {
 
             }
         });
+
         rg_tab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

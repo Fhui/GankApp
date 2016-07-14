@@ -2,10 +2,10 @@ package com.himan.himanpro.mvp.presenter;
 
 import android.text.TextUtils;
 import com.himan.himanpro.domain.RandomData;
-import com.himan.himanpro.mvp.model.ILoadData;
-import com.himan.himanpro.mvp.model.ILoadListener;
+import com.himan.himanpro.mvp.model.ganhuo.ILoadData;
+import com.himan.himanpro.mvp.model.ganhuo.ILoadListener;
 import com.himan.himanpro.mvp.model.LoadData;
-import com.himan.himanpro.mvp.view.ISetLoad;
+import com.himan.himanpro.mvp.view.ganhuo.ISetLoad;
 import com.himan.himanpro.utils.LogUtils;
 
 import java.util.List;

@@ -1,7 +1,8 @@
-package com.himan.himanpro.mvp.view;
+package com.himan.himanpro.mvp.view.fuli;
+
+import android.graphics.Bitmap;
 
 import com.himan.himanpro.domain.SortData;
-
 import java.util.List;
 
 

@@ -1,10 +1,13 @@
 package com.himan.himanpro.mvp.presenter;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 import com.himan.himanpro.domain.SortData;
-import com.himan.himanpro.mvp.model.ILoadSortData;
-import com.himan.himanpro.mvp.model.ILoadSortListener;
+import com.himan.himanpro.mvp.model.fuli.ILoadSortData;
+import com.himan.himanpro.mvp.model.fuli.ILoadSortListener;
 import com.himan.himanpro.mvp.model.LoadData;
-import com.himan.himanpro.mvp.view.ISetSortLoad;
+import com.himan.himanpro.mvp.view.fuli.ISetSortLoad;
 
 import java.util.List;
 
@@ -34,6 +37,10 @@ public class LoadSortPresenter implements Presenter{
                 setSortLoad.errorFor(errorinfo);
             }
         });
+    }
+
+        public Bitmap loadSortImage(String url, ImageView imageView){
+        return sortData.loadImg(url, imageView);
     }
 
     @Override

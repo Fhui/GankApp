@@ -1,4 +1,6 @@
-package com.himan.himanpro.mvp.model;
+package com.himan.himanpro.mvp.model.fuli;
+
+import android.graphics.Bitmap;
 
 import com.himan.himanpro.domain.RandomData;
 import com.himan.himanpro.domain.SortData;
@@ -12,5 +14,6 @@ public interface ILoadSortListener {
 
     void loadSuccess(List<SortData.ResultsBean> sortData);
     void loadError(String errorinfo);
+
 
 }
