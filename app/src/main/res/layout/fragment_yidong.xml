@@ -4,12 +4,57 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.himan.himanpro.view.SuperLoadingProgress
-        android:id="@+id/custom_progress"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        />
+
+    <RadioGroup
+        android:id="@+id/rg_yidong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_android"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/yidong_select"
+            android:text="android"/>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"/>
+
+
+        <RadioButton
+            android:id="@+id/rb_apple"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/yidong_select"
+            android:textColor="@android:color/white"
+            android:text="ios"/>
+
+    </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/fl_yidong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        </FrameLayout>
+
 
 
 </LinearLayout>

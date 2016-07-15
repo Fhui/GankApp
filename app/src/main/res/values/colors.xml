@@ -6,5 +6,7 @@
     <color name="colorOrange">#ff669900</color>
     <color name="colorOrangeSelect">#ff669900</color>
     <color name="whiteColor">#DCDCDC</color>
+    <color name="blue_select">#2bd591</color>
+    <color name="blue_selected">#11eeee</color>
 
 </resources>

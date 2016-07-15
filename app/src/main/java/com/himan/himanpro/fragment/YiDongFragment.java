@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.himan.himanpro.R;
@@ -18,7 +21,12 @@ import com.himan.himanpro.view.SuperLoadingProgress;
  */
 public class YiDongFragment extends BaseFragment {
 
-    private SuperLoadingProgress custom_progress;
+    private FrameLayout fl_yidong;
+    private RadioGroup rg_yidong;
+    private RadioButton rb_android;
+    private RadioButton rb_ios;
+    private AosFragment aosFragment;
+    private IosFragment iosFragment;
 
 
 
@@ -28,13 +36,30 @@ public class YiDongFragment extends BaseFragment {
     }
 
     public void initView(){
-        custom_progress = (SuperLoadingProgress) view.findViewById(R.id.custom_progress);
-        custom_progress.finishFail();
+        fl_yidong = (FrameLayout) view.findViewById(R.id.fl_yidong);
+        rg_yidong = (RadioGroup) view.findViewById(R.id.rg_yidong);
+        rb_android = (RadioButton) view.findViewById(R.id.rb_android);
+        rb_ios = (RadioButton) view.findViewById(R.id.rb_apple);
     }
 
     @Override
     public void initData() {
-
+        aosFragment = new AosFragment();
+        iosFragment = new IosFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_yidong, aosFragment).commit();
+        rg_yidong.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    case R.id.rb_android:
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_yidong, aosFragment).commit();
+                        break;
+                    case R.id.rb_apple:
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_yidong, iosFragment).commit();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
