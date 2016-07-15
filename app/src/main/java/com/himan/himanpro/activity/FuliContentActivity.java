@@ -21,11 +21,10 @@ public class FuliContentActivity extends BaseActivity implements ISetSortLoad {
     private LoadSortPresenter presenter;
     private Toolbar custom_toolbar;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fuli_content);
-        presenter = new LoadSortPresenter(this);
+    public int getLayout() {
+        return R.layout.activity_fuli_content;
     }
 
     @Override
@@ -36,6 +35,7 @@ public class FuliContentActivity extends BaseActivity implements ISetSortLoad {
 
     @Override
     public void initData() {
+        presenter = new LoadSortPresenter(this);
         Intent intent = getIntent();
         String url = intent.getStringExtra("imgURL");
         String title = intent.getStringExtra("title");

@@ -1,6 +1,5 @@
 package com.himan.himanpro.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,16 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.himan.himanpro.R;
-import com.himan.himanpro.activity.ContentActivity;
-import com.himan.himanpro.activity.FuliContentActivity;
 import com.himan.himanpro.adapter.CustomRecycleAdapter;
 import com.himan.himanpro.core.BaseFragment;
 import com.himan.himanpro.core.ProConstant;
@@ -25,7 +18,6 @@ import com.himan.himanpro.domain.SortData;
 import com.himan.himanpro.mvp.presenter.LoadSortPresenter;
 import com.himan.himanpro.mvp.view.fuli.ISetSortLoad;
 import com.himan.himanpro.utils.LogUtils;
-
 import java.util.List;
 
 //                                 _ooOoo_
@@ -60,11 +52,11 @@ import java.util.List;
 //                  不见满街漂亮妹，哪个归得程序员？
 
 /**
+ * 福利模块
  * Created by HIMan on 16/7/4.
  */
 public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
 
-    private View view;
     private RecyclerView recycle_view_fuli;
     public CustomRecycleAdapter adapter;
     public String url;
@@ -89,25 +81,18 @@ public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRef
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtils.i("onCreate");
+        sortPresenter = new LoadSortPresenter(this);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtils.i("onCreateView");
-        view = inflater.inflate(R.layout.fragment_fuli, container, false);
-        return view;
+    public int getLayout() {
+        return R.layout.fragment_fuli;
     }
 
     @Override
     public void onStart() {
         super.onStart();
         LogUtils.i("onStart");
-        url = ProConstant.getDataSort("20", "福利");
-        sortPresenter = new LoadSortPresenter(this);
-        adapter = new CustomRecycleAdapter(getActivity(), sortPresenter);
-        adapter.setOnItemClickListener(this);
-        sortPresenter.loadSortData();
     }
 
     @Override
@@ -137,6 +122,24 @@ public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRef
 
     @Override
     public void initData() {
+        adapter = new CustomRecycleAdapter(getActivity(), sortPresenter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void loadData() {
+        url = ProConstant.getDataSort("20", "福利");
+        sortPresenter.loadSortData();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtils.i("onActivityCreated");
+    }
+
+    @Override
+    public void onLazyLoad() {
 
     }
 

@@ -18,15 +18,13 @@ import com.himan.himanpro.view.SuperLoadingProgress;
  */
 public class YiDongFragment extends BaseFragment {
 
-    private View view;
     private SuperLoadingProgress custom_progress;
 
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_yidong, null);
-        return view;
+    public int getLayout() {
+        return R.layout.fragment_yidong;
     }
 
     public void initView(){
@@ -36,6 +34,16 @@ public class YiDongFragment extends BaseFragment {
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void loadData() {
+
+    }
+
+    @Override
+    public void onLazyLoad() {
 
     }
 

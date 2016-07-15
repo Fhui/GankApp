@@ -31,7 +31,11 @@ public class ContentActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_content;
     }
 
     @Override

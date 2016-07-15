@@ -3,6 +3,7 @@ package com.himan.himanpro.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
  * 自定义FragmentPagerAdapter
  * Created by HIMan on 16/7/5.
  */
-public class MyFragmentAdapter extends FragmentPagerAdapter {
+//public class MyFragmentAdapter extends FragmentPagerAdapter {
+public class MyFragmentAdapter extends FragmentStatePagerAdapter {
 
     List<Fragment> fragmentList;
 

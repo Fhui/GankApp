@@ -49,6 +49,8 @@ import com.himan.himanpro.core.BaseActivity;
 import com.himan.himanpro.fragment.FuLiFragment;
 import com.himan.himanpro.fragment.GanHuoFragment;
 import com.himan.himanpro.fragment.YiDongFragment;
+import com.himan.himanpro.utils.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +74,42 @@ public class AppStartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_start);
+        LogUtils.i("onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.i("onStart");
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_app_start;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.i("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.i("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.i("onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.i("onDestroy");
     }
 
     @Override
@@ -99,7 +136,7 @@ public class AppStartActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         vp_home.setAdapter(new MyFragmentAdapter(getSupportFragmentManager(), fragment_list));
-        vp_home.setOffscreenPageLimit(0);
+        vp_home.setOffscreenPageLimit(3);
         vp_home.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

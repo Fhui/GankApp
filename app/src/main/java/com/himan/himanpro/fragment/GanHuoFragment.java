@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,6 @@ import java.util.List;
  */
 public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefreshLayout.OnRefreshListener {
 
-    private View view;
     private RandomDataPresemter randomPresenter;
     private ListView ganhuo_lv;
     private List<RandomData.ResultsBean> resultsList;
@@ -79,7 +79,6 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
             switch(msg.what){
                 case 1:
                     swip_layout.setRefreshing(false);
-                    Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_SHORT).show();
                     break;
             }
             super.handleMessage(msg);
@@ -92,12 +91,10 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
         super.onCreate(savedInstanceState);
         LogUtils.i("onCreat");
     }
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtils.i("onCreateView");
-        view = inflater.inflate(R.layout.fragment_ganhuo, null);
-        return view;
+    public int getLayout() {
+        return R.layout.fragment_ganhuo;
     }
 
 
@@ -105,9 +102,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     public void onStart() {
         super.onStart();
         LogUtils.i("onStart");
-        url = ProConstant.getRandomData("10", "1");
-        randomPresenter = new RandomDataPresemter(this);
-        randomPresenter.loadRandomData();
+        LogUtils.i("randomPresenter:"+randomPresenter+"----"+"ganhuo_lv"+ganhuo_lv+"-------"+"adapter"+adapter);
     }
 
     @Override
@@ -123,22 +118,45 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        LogUtils.i("onStop");
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         LogUtils.i("onDestroy");
     }
 
+    @Override
     public void initView(){
+        LogUtils.i("initView");
         ganhuo_lv = (ListView) view.findViewById(R.id.ganhuo_lv);
         swip_layout = (SwipeRefreshLayout) view.findViewById(R.id.swip_layout);
+        swip_layout.setOnRefreshListener(this);
     }
 
     @Override
     public void initData() {
-        adapter = new GanHuoAdapter(getActivity());
+        LogUtils.i("initData");
         swip_layout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_orange_dark,
                 android.R.color.holo_green_light, android.R.color.holo_red_dark);
-        swip_layout.setOnRefreshListener(this);
+        adapter = new GanHuoAdapter(getActivity());
+        setItemClick();
+    }
+
+    @Override
+    public void loadData() {
+        LogUtils.i("loadData");
+        randomPresenter = new RandomDataPresemter(this);
+        url = ProConstant.getRandomData("10", "1");
+        randomPresenter.loadRandomData();
+    }
+
+    @Override
+    public void onLazyLoad() {
+
     }
 
     @Override
@@ -165,10 +183,9 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     @Override
     public void successFor(List<RandomData.ResultsBean> randomData) {
         resultsList = randomData;
-        Toast.makeText(getActivity(), "load success", Toast.LENGTH_SHORT).show();
         adapter.setList(resultsList);
         ganhuo_lv.setAdapter(adapter);
-        setItemClick();
+        Toast.makeText(getActivity(), "load success", Toast.LENGTH_SHORT).show();
     }
 
     public void setItemClick(){
