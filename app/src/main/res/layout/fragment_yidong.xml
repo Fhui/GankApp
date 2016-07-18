@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"/>
+            android:background="@android:color/white"/>
 
 
         <RadioButton

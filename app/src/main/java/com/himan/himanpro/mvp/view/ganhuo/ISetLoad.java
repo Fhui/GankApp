@@ -1,9 +1,6 @@
 package com.himan.himanpro.mvp.view.ganhuo;
 
-import android.widget.ImageView;
-
 import com.himan.himanpro.domain.RandomData;
-import com.himan.himanpro.domain.SortData;
 
 import java.util.List;
 
