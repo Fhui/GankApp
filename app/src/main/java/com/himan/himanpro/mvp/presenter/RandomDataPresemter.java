@@ -25,7 +25,6 @@ public class RandomDataPresemter implements Presenter {
 
     public void loadRandomData() {
         String url = setLoad.getUrl();
-        LogUtils.i("presenter--url:"+url);
         setLoad.showProgress();
         if (!TextUtils.isEmpty(url)) {
             loadData.loadRandomData(url, new ILoadListener() {
@@ -34,17 +33,14 @@ public class RandomDataPresemter implements Presenter {
                     setLoad.successFor(randomData);
                     setLoad.hideProgress();
                 }
-
                 @Override
                 public void loadError(String errorinfo) {
-
                     setLoad.errorFor(errorinfo);
                     setLoad.hideProgress();
                 }
             });
         }
     }
-
 
     @Override
     public void resume() {

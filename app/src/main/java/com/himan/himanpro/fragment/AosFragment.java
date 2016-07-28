@@ -1,41 +1,38 @@
 package com.himan.himanpro.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.himan.himanpro.R;
 import com.himan.himanpro.adapter.CustomBaseAdapter;
 import com.himan.himanpro.core.BaseFragment;
 import com.himan.himanpro.core.ProConstant;
-import com.himan.himanpro.domain.SortData;
-import com.himan.himanpro.holder.GanHuoHolder;
-import com.himan.himanpro.mvp.presenter.LoadSortPresenter;
-import com.himan.himanpro.mvp.view.fuli.ISetSortLoad;
+import com.himan.himanpro.domain.YIDongResponse;
+import com.himan.himanpro.holder.YDHolder;
+import com.himan.himanpro.mvp.presenter.LoadYDPresenter;
+import com.himan.himanpro.mvp.view.yidong.ISetYData;
 import com.himan.himanpro.utils.LogUtils;
 
 import java.util.List;
 
 /**
- * Created by HIMan on 16/7/15.
+ * Created by HIMan on 16/7/20.
  */
-public class AosFragment extends BaseFragment implements ISetSortLoad {
+public class AosFragment extends BaseFragment implements ISetYData {
 
-    private ListView lv_show_aos_content;
     private String url;
-    private LoadSortPresenter presenter;
-    private List<SortData.ResultsBean> sortDataList;
+    private List<YIDongResponse.ResultsBean> yDataList;
+    private ListView lv_show_aos_content;
     private AosAdapter adapter;
+    private LoadYDPresenter presenter;
 
 
     @Override
     public int getLayout() {
-        return R.layout.android_fragment;
+        return R.layout.android_fragment ;
     }
 
     @Override
@@ -45,16 +42,15 @@ public class AosFragment extends BaseFragment implements ISetSortLoad {
 
     @Override
     public void initData() {
-        url = ProConstant.getDataSort("20", "Android");
-        LogUtils.i("AOS---URL" + url);
-        adapter = new AosAdapter(getActivity());
-
+        adapter =  new AosAdapter(getActivity());
     }
 
     @Override
     public void loadData() {
-        presenter = new LoadSortPresenter(this);
-        presenter.loadSortData();
+        url = ProConstant.getDataSort("20", "Android");
+        LogUtils.i("AOS-URL:"+url);
+        presenter = new LoadYDPresenter(this);
+        presenter.loadYData();
     }
 
     @Override
@@ -62,10 +58,6 @@ public class AosFragment extends BaseFragment implements ISetSortLoad {
 
     }
 
-    @Override
-    public void setUrl(String url) {
-
-    }
 
     @Override
     public String getUrl() {
@@ -83,23 +75,21 @@ public class AosFragment extends BaseFragment implements ISetSortLoad {
     }
 
     @Override
-    public void successFor(List<SortData.ResultsBean> sortDataList) {
-        LogUtils.i("success");
-        this.sortDataList = sortDataList;
-        adapter.setList(sortDataList);
+    public void successFor(List<YIDongResponse.ResultsBean> yDataList) {
+        this.yDataList = yDataList;
+        adapter.setList(this.yDataList);
         lv_show_aos_content.setAdapter(adapter);
-        Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+        LogUtils.i("success");
     }
 
     @Override
     public void errorFor(String errorInfo) {
-        LogUtils.i("error");
-        Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+        LogUtils.i("errorInfo:"+errorInfo);
     }
 
-    class AosAdapter extends CustomBaseAdapter<SortData.ResultsBean> {
+    class AosAdapter extends CustomBaseAdapter<YIDongResponse.ResultsBean>{
 
-        GanHuoHolder ganHuoHolder;
+        YDHolder holder;
 
         public AosAdapter(Context context) {
             super(context);
@@ -107,16 +97,21 @@ public class AosFragment extends BaseFragment implements ISetSortLoad {
 
         @Override
         public View setConvertView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                ganHuoHolder = new GanHuoHolder();
-                convertView = View.inflate(getActivity(), R.layout.ganhuo_lv_items, null);
-                ganHuoHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_ganhuo_time);
-                ganHuoHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_ganhuo_titme);
-                convertView.setTag(ganHuoHolder);
-            } else {
-                convertView = (View) convertView.getTag();
+            if(convertView == null){
+                holder = new YDHolder();
+                convertView = View.inflate(getActivity(), R.layout.yidong_lv_items, null);
+                holder.tv_time = (TextView) convertView.findViewById(R.id.tv_yd_time);
+                holder.tv_title = (TextView) convertView.findViewById(R.id.tv_yd_title);
+                holder.tv_who = (TextView) convertView.findViewById(R.id.tv_yd_who);
+                convertView.setTag(holder);
+            }else{
+                holder = (YDHolder) convertView.getTag();
             }
-            ganHuoHolder.tv_time.setText("a");
+            String time = yDataList.get(position).getCreatedAt();
+            time = time.substring(0,10);
+            holder.tv_time.setText(time);
+            holder.tv_title.setText("Android");
+            holder.tv_who.setText(yDataList.get(position).getWho());
             return convertView;
         }
     }

@@ -9,8 +9,6 @@ import java.util.List;
  */
 public interface ISetYData {
 
-    void setUrl(String url);
-
     String getUrl();
 
     void showProgress();

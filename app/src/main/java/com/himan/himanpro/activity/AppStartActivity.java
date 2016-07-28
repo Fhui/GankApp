@@ -1,7 +1,6 @@
 package com.himan.himanpro.activity;
 
 
-
 //                                 _ooOoo_
 //                               o8888888o
 //                                 88" . "88
@@ -40,9 +39,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
 import com.himan.himanpro.R;
 import com.himan.himanpro.adapter.MyFragmentAdapter;
 import com.himan.himanpro.core.BaseActivity;
@@ -50,11 +52,13 @@ import com.himan.himanpro.fragment.FuLiFragment;
 import com.himan.himanpro.fragment.GanHuoFragment;
 import com.himan.himanpro.fragment.YiDongFragment;
 import com.himan.himanpro.utils.LogUtils;
+import com.himan.himanpro.view.CircleImageView;
+import com.himan.himanpro.view.SelectPicPopupWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppStartActivity extends BaseActivity {
+public class AppStartActivity extends BaseActivity implements View.OnClickListener {
 
 
     private FuLiFragment fuli_fragment;
@@ -70,12 +74,9 @@ public class AppStartActivity extends BaseActivity {
     private DrawerLayout dl_left;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mDrawerToggle;
+    private CircleImageView circle_view;
+    private SelectPicPopupWindow popWindow;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtils.i("onCreate");
-    }
 
     @Override
     protected void onStart() {
@@ -121,9 +122,12 @@ public class AppStartActivity extends BaseActivity {
         rb_yidong = (RadioButton) findViewById(R.id.rb_fuli);
         dl_left = (DrawerLayout) findViewById(R.id.dl_left);
         toolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        circle_view = (CircleImageView) findViewById(R.id.circle_view);
+        circle_view.setOnClickListener(this);
     }
 
-    public void initData(){
+    public void initData() {
+        circle_view.setImageResource(R.drawable.p1129458486);
         fuli_fragment = new FuLiFragment();
         ganhuo_fragment = new GanHuoFragment();
         yidong_fragment = new YiDongFragment();
@@ -145,7 +149,7 @@ public class AppStartActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         rg_tab.check(R.id.rb_ganhuo);
                         break;
@@ -167,7 +171,7 @@ public class AppStartActivity extends BaseActivity {
         rg_tab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch(i){
+                switch (i) {
                     case R.id.rb_ganhuo:
                         vp_home.setCurrentItem(0);
                         toolbar.setTitle("干货");
@@ -184,7 +188,7 @@ public class AppStartActivity extends BaseActivity {
             }
         });
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, dl_left, toolbar, R.string.open, R.string.close){
+        mDrawerToggle = new ActionBarDrawerToggle(this, dl_left, toolbar, R.string.open, R.string.close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -197,5 +201,20 @@ public class AppStartActivity extends BaseActivity {
         };
         mDrawerToggle.syncState();
         dl_left.setDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.circle_view:
+                popWindow = new SelectPicPopupWindow(this, this);
+                popWindow.showAtLocation(this.findViewById(R.id.circle_view),
+                        Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                break;
+            case R.id.btn_take:
+                break;
+            case R.id.btn_photos:
+                break;
+        }
     }
 }

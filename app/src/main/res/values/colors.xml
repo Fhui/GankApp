@@ -8,5 +8,8 @@
     <color name="whiteColor">#DCDCDC</color>
     <color name="blue_select">#2bd591</color>
     <color name="blue_selected">#11eeee</color>
+    <color name="gree_dark">#cccccc</color>
+    <color name="gree_dark_normal">#021103</color>
+
 
 </resources>

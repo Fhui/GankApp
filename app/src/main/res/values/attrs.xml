@@ -5,4 +5,11 @@
         <attr name="color2" format="reference|color"/>
         <attr name="color3" format="reference|color"/>
     </declare-styleable>
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
 </resources>

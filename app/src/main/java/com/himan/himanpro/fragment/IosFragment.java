@@ -65,10 +65,6 @@ public class IosFragment extends BaseFragment implements ISetYData {
 
     }
 
-    @Override
-    public void setUrl(String url) {
-
-    }
 
     @Override
     public String getUrl() {
