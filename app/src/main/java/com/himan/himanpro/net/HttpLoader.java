@@ -135,7 +135,17 @@ public class HttpLoader {
             mRequestQueue.add(request);
         }
         mInFlightRequests.put(requestCode, request);
-        mRequestQueue.start();
+
+        /**
+         * fuck, volley在初始化requestqueue的时候已经调用过了start方法.
+         * 谨记谨记, 纠结了好久
+         * 如果在调用会报java.io.InterruptedIOException
+         * 就像, 我第一次抢劫了一个人,第二次又特么抢劫了同一个人,人家能不报警吗?
+         * fuck  真解气.
+         * 佛祖包邮.
+         */
+
+       mRequestQueue.start();
         return request;
     }
 

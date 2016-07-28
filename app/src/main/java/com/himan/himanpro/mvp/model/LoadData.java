@@ -17,6 +17,8 @@ import com.himan.himanpro.mvp.model.yidong.ILoadYDListener;
 import com.himan.himanpro.mvp.model.yidong.ILoadYData;
 import com.himan.himanpro.net.HttpLoader;
 import com.himan.himanpro.net.ResponseListener;
+import com.himan.himanpro.utils.LogUtils;
+
 import java.util.List;
 
 /**
@@ -45,6 +47,7 @@ public class LoadData implements ILoadData, ILoadSortData, ILoadYData {
             @Override
             public void onGetResponseError(int requestCode, VolleyError error) {
                 listener.loadError(error.toString());
+                LogUtils.i("--------------------------error---------------------"+error.toString());
             }
         }, true);
         return randomDataList;

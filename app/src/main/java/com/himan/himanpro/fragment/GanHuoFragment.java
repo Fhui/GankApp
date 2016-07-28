@@ -86,47 +86,10 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     };
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtils.i("onCreat");
-    }
 
     @Override
     public int getLayout() {
         return R.layout.fragment_ganhuo;
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        LogUtils.i("onStart");
-        LogUtils.i("randomPresenter:"+randomPresenter+"----"+"ganhuo_lv"+ganhuo_lv+"-------"+"adapter"+adapter);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogUtils.i("onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogUtils.i("onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        LogUtils.i("onStop");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LogUtils.i("onDestroy");
     }
 
     @Override
@@ -139,6 +102,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     @Override
     public void initData() {
+        url = ProConstant.getRandomData("10", "1");
         LogUtils.i("initData");
         swip_layout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_orange_dark,
                 android.R.color.holo_green_light, android.R.color.holo_red_dark);
@@ -150,7 +114,6 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     public void loadData() {
         LogUtils.i("loadData");
         randomPresenter = new RandomDataPresemter(this);
-        url = ProConstant.getRandomData("10", "1");
         randomPresenter.loadRandomData();
     }
 
@@ -159,14 +122,9 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     }
 
-    @Override
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     @Override
     public String getUrl() {
-        LogUtils.i("url-------->"+url);
         return url;
     }
 
@@ -208,7 +166,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     @Override
     public void onRefresh() {
-         setUrl(ProConstant.getRandomData("10", i+""));
+         url = ProConstant.getRandomData("10", i+"");
          randomPresenter.loadRandomData();
          i++;
         Message msg = Message.obtain();

@@ -79,39 +79,11 @@ public class AppStartActivity extends BaseActivity implements View.OnClickListen
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        LogUtils.i("onStart");
-    }
-
-    @Override
     public int getLayout() {
         return R.layout.activity_app_start;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LogUtils.i("onResume");
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LogUtils.i("onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LogUtils.i("onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LogUtils.i("onDestroy");
-    }
 
     @Override
     public void initView() {
