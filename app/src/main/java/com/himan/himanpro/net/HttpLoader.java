@@ -144,8 +144,7 @@ public class HttpLoader {
          * fuck  真解气.
          * 佛祖包邮.
          */
-
-       mRequestQueue.start();
+//       mRequestQueue.start();
         return request;
     }
 

@@ -28,6 +28,7 @@ import com.himan.himanpro.mvp.view.ganhuo.ISetLoad;
 import com.himan.himanpro.utils.LogUtils;
 import com.himan.himanpro.utils.ProgressUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //                                 _ooOoo_
@@ -102,8 +103,8 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     @Override
     public void initData() {
-        url = ProConstant.getRandomData("10", "1");
         LogUtils.i("initData");
+        resultsList = new ArrayList<>();
         swip_layout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_orange_dark,
                 android.R.color.holo_green_light, android.R.color.holo_red_dark);
         adapter = new GanHuoAdapter(getActivity());
@@ -112,9 +113,10 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     @Override
     public void loadData() {
+        url = ProConstant.getRandomData("10", "1");
         LogUtils.i("loadData");
         randomPresenter = new RandomDataPresemter(this);
-        randomPresenter.loadRandomData();
+        randomPresenter.loadRandomData(url);
     }
 
     @Override
@@ -123,10 +125,6 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     }
 
 
-    @Override
-    public String getUrl() {
-        return url;
-    }
 
     @Override
     public void showProgress() {
@@ -140,7 +138,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
 
     @Override
     public void successFor(List<RandomData.ResultsBean> randomData) {
-        resultsList = randomData;
+        resultsList.addAll(0,randomData);
         adapter.setList(resultsList);
         ganhuo_lv.setAdapter(adapter);
         Toast.makeText(getActivity(), "load success", Toast.LENGTH_SHORT).show();
@@ -167,7 +165,7 @@ public class GanHuoFragment extends BaseFragment implements ISetLoad, SwipeRefre
     @Override
     public void onRefresh() {
          url = ProConstant.getRandomData("10", i+"");
-         randomPresenter.loadRandomData();
+         randomPresenter.loadRandomData(url);
          i++;
         Message msg = Message.obtain();
         msg.what = 1;

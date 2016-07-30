@@ -23,10 +23,10 @@ public class RandomDataPresemter implements Presenter {
         loadData = new LoadData();
     }
 
-    public void loadRandomData() {
-        String url = setLoad.getUrl();
+    public void loadRandomData(String url) {
         setLoad.showProgress();
-        if (!TextUtils.isEmpty(url)) {
+//        if (!TextUtils.isEmpty(url)) {
+        if (url != null && url.length() > 0) {
             loadData.loadRandomData(url, new ILoadListener() {
                 @Override
                 public void loadSuccess(final List<RandomData.ResultsBean> randomData) {

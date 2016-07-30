@@ -10,8 +10,6 @@ import java.util.List;
 public interface ISetLoad {
 
 
-    String getUrl();
-
     void showProgress();
 
     void hideProgress();

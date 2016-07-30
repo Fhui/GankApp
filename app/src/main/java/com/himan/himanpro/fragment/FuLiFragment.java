@@ -18,6 +18,8 @@ import com.himan.himanpro.domain.SortData;
 import com.himan.himanpro.mvp.presenter.LoadSortPresenter;
 import com.himan.himanpro.mvp.view.fuli.ISetSortLoad;
 import com.himan.himanpro.utils.LogUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //                                 _ooOoo_
@@ -89,29 +91,6 @@ public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRef
         return R.layout.fragment_fuli;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        LogUtils.i("onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogUtils.i("onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogUtils.i("onPause");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LogUtils.i("onDestory");
-    }
 
     @Override
     public void initView() {
@@ -122,6 +101,7 @@ public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRef
 
     @Override
     public void initData() {
+        sortDataList = new ArrayList<>();
         adapter = new CustomRecycleAdapter(getActivity(), sortPresenter);
         adapter.setOnItemClickListener(this);
     }
@@ -165,10 +145,10 @@ public class FuLiFragment extends BaseFragment implements ISetSortLoad, SwipeRef
 
     @Override
     public void successFor(List<SortData.ResultsBean> sortDataList) {
-        this.sortDataList = sortDataList;
+        this.sortDataList.addAll(0, sortDataList);
         LogUtils.i("sortDataList----->" + sortDataList.size());
         Toast.makeText(getActivity(), "load success", Toast.LENGTH_SHORT).show();
-        adapter.setSortDataList(sortDataList);
+        adapter.setSortDataList(this.sortDataList);
         recycle_view_fuli.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recycle_view_fuli.setAdapter(adapter);
     }
