@@ -33,7 +33,10 @@ package com.himan.himanpro.activity;
 //                  不见满街漂亮妹，哪个归得程序员？
 
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -43,18 +46,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import com.himan.himanpro.R;
 import com.himan.himanpro.adapter.MyFragmentAdapter;
 import com.himan.himanpro.core.BaseActivity;
+import com.himan.himanpro.core.ProConstant;
 import com.himan.himanpro.fragment.FuLiFragment;
 import com.himan.himanpro.fragment.GanHuoFragment;
 import com.himan.himanpro.fragment.YiDongFragment;
-import com.himan.himanpro.utils.LogUtils;
+import com.himan.himanpro.utils.PhotoUtils;
 import com.himan.himanpro.view.CircleImageView;
 import com.himan.himanpro.view.SelectPicPopupWindow;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +83,6 @@ public class AppStartActivity extends BaseActivity implements View.OnClickListen
     public int getLayout() {
         return R.layout.activity_app_start;
     }
-
 
 
     @Override
@@ -145,14 +145,17 @@ public class AppStartActivity extends BaseActivity implements View.OnClickListen
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_ganhuo:
+                        dl_left.closeDrawers();
                         vp_home.setCurrentItem(0);
                         toolbar.setTitle("干货");
                         break;
                     case R.id.rb_fuli:
+                        dl_left.closeDrawers();
                         vp_home.setCurrentItem(1);
                         toolbar.setTitle("福利");
                         break;
                     case R.id.rb_yidong:
+                        dl_left.closeDrawers();
                         vp_home.setCurrentItem(2);
                         toolbar.setTitle("移动端");
                         break;
@@ -181,12 +184,43 @@ public class AppStartActivity extends BaseActivity implements View.OnClickListen
             case R.id.circle_view:
                 popWindow = new SelectPicPopupWindow(this, this);
                 popWindow.showAtLocation(this.findViewById(R.id.circle_view),
-                        Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.btn_take:
                 break;
             case R.id.btn_photos:
+                Intent intent=new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
+                intent.putExtra("aspectX", 1);
+                intent.putExtra("aspectY", 1);
+                intent.putExtra("outputX", 80);
+                intent.putExtra("outputY", 80);
+                intent.putExtra("return-data", true);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/jpeg");
+                if(android.os.Build.VERSION.SDK_INT>=android.os.Build.VERSION_CODES.KITKAT){
+                    startActivityForResult(intent, ProConstant.SELECT_PIC_KITKAT);
+                }else{
+                    startActivityForResult(intent, ProConstant.SELECT_PIC);
+                }
                 break;
         }
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode != RESULT_OK){
+            return;
+        }
+            switch(requestCode){
+                case ProConstant.SELECT_PIC_KITKAT:
+                    Uri uri = data.getData();
+                   String path =  PhotoUtils.getPath(this, uri);
+                    Bitmap img = BitmapFactory.decodeFile(path);
+                    circle_view.setImageBitmap(img);
+                    break;
+            }
+    }
+
+
 }

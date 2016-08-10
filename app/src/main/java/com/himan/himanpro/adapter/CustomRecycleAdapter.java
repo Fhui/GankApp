@@ -3,6 +3,8 @@ package com.himan.himanpro.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,10 @@ import com.himan.himanpro.domain.SortData;
 import com.himan.himanpro.holder.RecycleHolder;
 import com.himan.himanpro.mvp.presenter.LoadSortPresenter;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +31,8 @@ import java.util.List;
  */
 public class CustomRecycleAdapter extends RecyclerView.Adapter<RecycleHolder> {
 
-
+    private static final String SAVE_PIC_PATH= Environment.getExternalStorageState().equalsIgnoreCase(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() : "/mnt/sdcard";//保存到SD卡
+    private static final String SAVE_REAL_PATH = SAVE_PIC_PATH;//保存的确切位置
     List<SortData.ResultsBean> sortDataList;
     List<Integer> listHeights;
     private LayoutInflater layoutInflater;
@@ -64,7 +71,7 @@ public class CustomRecycleAdapter extends RecyclerView.Adapter<RecycleHolder> {
 
     @Override
     public void onBindViewHolder(RecycleHolder holder, final int position) {
-        presenter.loadSortImage(sortDataList.get(position).getUrl(), holder.imageView);
+        final Bitmap bitmap = presenter.loadSortImage(sortDataList.get(position).getUrl(), holder.imageView);
         holder.textView.setText(sortDataList.get(position).getCreatedAt().substring(0, 10));
 
         if (onItemClickListener != null) {
@@ -86,5 +93,6 @@ public class CustomRecycleAdapter extends RecyclerView.Adapter<RecycleHolder> {
     public int getItemCount() {
         return sortDataList.size();
     }
+
 
 }

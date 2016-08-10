@@ -17,4 +17,9 @@ public class ProConstant {
     }
 
     public static int GANHUO_REFRESH_OK = 1;
+
+    public static final int SELECT_PIC_KITKAT = 3021;
+
+    public static final int SELECT_PIC = 3022;
+
 }
